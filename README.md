@@ -1,28 +1,28 @@
-Converting Mannequins into models:
+# Transforming Mannequins into Photorealistic Models
 
-Description:
-This project was to converting mannequins into real life models. To lower the cost of seller as they pay for the photoshoot with models.
-https://colab.research.google.com/drive/1VU0sQ99VHOj2j0vXMHkXwr0O-AAc7v6h?usp=sharing
+## Project Overview:
 
-Models for detection and segmentation:-
-We will be using grounding dino(https://github.com/IDEA-Research/GroundingDINO) and segment anything model( https://github.com/facebookresearch/segment-anything) for generating masks for the inpainting. 
-Grounded-segment-anytging(https://github.com/IDEA-Research/Grounded-Segment-Anything) will be used for creating the mask of mannequin body and head.
-Now , we will use cloth segmentation model based on u2net for the segmentation of cloth(https://github.com/wildoctopus/huggingface-cloth-segmentation).
+This initiative aims to transform mannequins into lifelike models through advanced image processing techniques. The primary objective is to reduce the financial burden on sellers associated with traditional model photoshoots by leveraging state-of-the-art AI models for generating realistic images.
 
-Mask creation:-
-Mask creation, (head mask + person mask) - cloth_segmentation.
-Head mask will be created with head detection and converting detection box into the mask. Person mask is created with the persondetection and  segmentation.
-Last cloth segmentation will be created with u2net pretrained model by wildoctopis.
+## Technical Approach:
 
-Image generation using diffusion :-
-Now, we will pass the image and mask created with the stable diffusion models juggernautxl(finetuned version of sdxl which gives photorealistic image)
-https://huggingface.co/stablediffusionapi/juggernaut-xl
-https://civitai.com/models/133005/juggernaut-xl
- and realisticvision6(finetuned version of sd1.5) 
-https://huggingface.co/SG161222/Realistic_Vision_V6.0_B1_noVAE
-https://civitai.com/models/4201/realistic-vision-v60-b1
-.then, we will use the fooocus api(https://github.com/konieshadow/Fooocus-API) with these models which has lora and ip adapters which makes the generarion more perfect.
-Fooocus api is a docker image of the image generarion software Fooocus(https://github.com/lllyasviel/Fooocus).
-Here are the resulting images:-
+### Model Selection for Detection and Segmentation:
+- **Grounding DINO**: Utilized for generating precise masks for inpainting tasks, facilitating accurate delineation of the mannequin and clothing items. [Grounding DINO GitHub](https://github.com/IDEA-Research/GroundingDINO)
+- **Segment Anything Model**: Employed for its robust capability to segment various objects within an image, essential for isolating the mannequin from the background. [Segment Anything GitHub](https://github.com/facebookresearch/segment-anything)
+- **Grounded Segment Anything**: Combines the strengths of grounding and segmentation to create detailed masks of the mannequin's body and head. [Grounded Segment Anything GitHub](https://github.com/IDEA-Research/Grounded-Segment-Anything)
+- **Cloth Segmentation Model (U2Net)**: Specifically used for the segmentation of clothing, ensuring the fabric's texture and form are accurately captured. [Cloth Segmentation GitHub](https://github.com/wildoctopus/huggingface-cloth-segmentation)
 
+### Mask Creation Process:
+The process involves combining the head and body masks while subtracting the cloth segmentation to retain only the mannequin's figure. The head mask is derived from head detection algorithms, converting detection boxes into masks. Similarly, the body mask is obtained through person detection and segmentation techniques. The cloth segmentation is accomplished using the U2Net model, tailored for textile attributes.
 
+### Photorealistic Image Synthesis:
+- **Stable Diffusion Models**: The project employs Juggernaut XL and Realistic Vision V6.0, both fine-tuned versions of stable diffusion models known for their high-quality, lifelike image generation capabilities.
+    - [Juggernaut XL on Hugging Face](https://huggingface.co/stablediffusionapi/juggernaut-xl)
+    - [Realistic Vision V6.0 on Hugging Face](https://huggingface.co/SG161222/Realistic_Vision_V6.0_B1_noVAE)
+- **Fooocus API Integration**: Enhances the image generation process by incorporating LoRA and IP adapters, resulting in more refined and accurate visual outputs. The Fooocus API serves as a bridge to the Fooocus image generation software, optimizing the model's performance for this specific application.
+    - [Fooocus API GitHub](https://github.com/konieshadow/Fooocus-API)
+    - [Fooocus Software GitHub](https://github.com/lllyasviel/Fooocus)
+
+The combination of these sophisticated models and techniques culminates in the creation of photorealistic images where mannequins are seamlessly transformed into human models, offering a cost-effective and scalable solution for digital fashion showcases.
+
+For a detailed walkthrough of the process and to view sample outputs, please refer to the project documentation available on [Google Colab](https://colab.research.google.com/drive/1VU0sQ99VHOj2j0vXMHkXwr0O-AAc7v6h?usp=sharing).
